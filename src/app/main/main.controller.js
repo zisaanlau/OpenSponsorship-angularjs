@@ -42,7 +42,7 @@ export class MainController {
         })
 
         .catch(() => {
-          alert("yo");
+          alert("Loading Error");
         });
     };
   }

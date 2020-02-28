@@ -14,6 +14,7 @@
           <th>No.</th>
           <th>Name</th>
           <th>Gender</th>
+          <th>Date of Birth</th>
           <th>Team</th>
           <th>Association</th>
         </tr>
@@ -23,13 +24,14 @@
           <td>{{ user.position }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.gender }}</td>
+          <td>{{ user.birth }}</td>
           <td>{{ user.team }}</td>
           <td>{{ user.association }}</td>
         </tr>
       </table>
     </div>
   </div>
-  <div ng-if="!shown.show" class="upload-button" ng-click="isShown()">
-    <button>Upload Profile</button>
+  <div ng-if="!shown.show" class="upload-button">
+    <button ng-click="isShown()">Upload Profile</button>
   </div>
 </div>
