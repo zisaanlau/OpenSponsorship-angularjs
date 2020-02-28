@@ -1,0 +1,443 @@
+<main ng-app="OpenSponsorship" ng-cloak>
+  <md-progress-linear
+    md-mode="determinate"
+    class="md-accent"
+    value="{{progressValue}}"
+  ></md-progress-linear>
+  <md-content
+    class="md-padding"
+    layout-xs="column"
+    layout="row"
+    layout-align="center center"
+  >
+    <div flex-xs flex-gt-xs="40" layout="column" layout-align="center center">
+      <form
+        name="multiStepForm"
+        id="submitForm"
+        class="submitForm form-validation"
+        role="form"
+        novalidate
+      >
+        <div
+          class="animate-switch-container"
+          ng-switch
+          on="stage"
+          ng-class="{forward: direction, backward:!direction}"
+        >
+          <!--
+       
+          Stage 1
+      
+        -->
+          <md-card
+            class="card-40-center animate-switch stepCard"
+            md-theme-watch
+            ng-switch-when="stage1"
+          >
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Basic Info</span>
+
+                <md-card-content>
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Name *</label>
+                      <input name="name" ng-model="formParams.name" />
+                      <div
+                        class="validation"
+                        ng-class="{'input-error': formValidation && multiStepForm.name.$error.required}"
+                      >
+                        <!-- This is required. -->
+                      </div>
+                    </md-input-container>
+                  </div>
+
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Gender *</label>
+
+                      <md-select
+                        name="genderValue"
+                        ng-model="formParams.gender"
+                      >
+                        <md-option ng-repeat="sex in genders" ng-value="sex">
+                          {{sex}}
+                        </md-option>
+                      </md-select>
+                      <div
+                        class="validation"
+                        ng-class="{'input-error': formValidation && multiStepForm.genderValue.$error.required}"
+                      >
+                        <!-- This is required. -->
+                      </div>
+                    </md-input-container>
+                  </div>
+                  <div layout="row">
+                    <!-- Date of birth -->
+                    <md-input-container flex="100">
+                      <label>Date of Birth (format: MM/DD/YYYY) </label>
+                      <input
+                        type="text"
+                        name="birth"
+                        pattern="\d{2}\/\d{2}\/\d{4}"
+                        ng-model="formParams.birth"
+                      />
+                    </md-input-container>
+                  </div>
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Nationality</label>
+
+                      <input
+                        type="text"
+                        name="nationality"
+                        ng-model="formParams.nationality"
+                      />
+                    </md-input-container>
+                  </div>
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Location</label>
+
+                      <input
+                        type="text"
+                        name="location"
+                        ng-model="formParams.location"
+                      />
+                    </md-input-container>
+                  </div>
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Marital Status</label>
+
+                      <md-select name="marital" ng-model="formParams.marital">
+                        <md-option
+                          ng-repeat="marital in maritals"
+                          ng-value="marital"
+                        >
+                          {{marital}}
+                        </md-option>
+                      </md-select>
+                    </md-input-container>
+                  </div>
+                </md-card-content>
+              </md-card-title-text>
+            </md-card-title>
+
+            <md-card-actions layout="row" layout-align="end center">
+              <button
+                type="button"
+                class="md-raised md-warn md-button md-ink-ripple"
+                ng-click="next('stage2')"
+              >
+                Next
+              </button>
+            </md-card-actions>
+          </md-card>
+
+          <!--
+       
+          Stage 2
+       
+        -->
+          <md-card
+            class="card-40-center animate-switch stepCard"
+            md-theme-watch
+            ng-switch-when="stage2"
+          >
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Personal</span>
+                <md-card-content>
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Interests</label>
+                      <input
+                        type="text"
+                        name="interests"
+                        ng-model="formParams.interests"
+                      />
+                    </md-input-container>
+                  </div>
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Alcohol?</label>
+
+                      <md-select name="alcohol" ng-model="formParams.alcohol">
+                        <md-option
+                          ng-repeat="alcohol in alcohols"
+                          ng-value="alcohol"
+                        >
+                          {{alcohol}}
+                        </md-option>
+                      </md-select>
+                    </md-input-container>
+                  </div>
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Pet(s)</label>
+                      <input
+                        type="text"
+                        name="pets"
+                        ng-model="formParams.pets"
+                      />
+                    </md-input-container>
+                  </div>
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Charities</label>
+                      <input
+                        type="text"
+                        name="charities"
+                        ng-model="formParams.charities"
+                      />
+                    </md-input-container>
+                  </div>
+                </md-card-content>
+                <!-- <md-card-title-media></md-card-title-media> -->
+              </md-card-title-text>
+            </md-card-title>
+
+            <!-- buttons -->
+            <md-card-actions layout="row" layout-align="end center">
+              <button
+                type="button"
+                class="md-raised md-warn md-button md-ink-ripple"
+                ng-click="back('stage1')"
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                class="md-raised md-warn md-button md-ink-ripple"
+                ng-click="next('stage3')"
+              >
+                Next
+              </button>
+            </md-card-actions>
+          </md-card>
+
+          <!-- stage 3 -->
+          <md-card
+            class="card-40-center animate-switch stepCard"
+            md-theme-watch
+            ng-switch-when="stage3"
+          >
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Sports</span>
+                <md-card-content>
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Team *</label>
+                      <input
+                        type="text"
+                        name="team"
+                        ng-model="formParams.team"
+                      />
+                      <div
+                        class="validation"
+                        ng-class="{'input-error': formValidation && multiStepForm.firstName.$error.required}"
+                      >
+                        <!-- This is required. -->
+                      </div>
+                    </md-input-container>
+                  </div>
+
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Association *</label>
+                      <input
+                        type="text"
+                        name="association "
+                        ng-model="formParams.association"
+                      />
+                      <div
+                        class="validation"
+                        ng-class="{'input-error': formValidation && multiStepForm.firstName.$error.required}"
+                      >
+                        <!-- This is required. -->
+                      </div>
+                    </md-input-container>
+                  </div>
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Sports *</label>
+
+                      <md-select
+                        name="sports"
+                        ng-model="formParams.sports"
+                        multiple
+                      >
+                        <md-option ng-repeat="sport in sports" ng-value="sport">
+                          {{sport}}
+                        </md-option>
+                      </md-select>
+                      <div
+                        class="validation"
+                        ng-class="{'input-error': formValidation && multiStepForm.sports.$error.required}"
+                      >
+                        <!-- This is required. -->
+                      </div>
+                    </md-input-container>
+                  </div>
+                </md-card-content>
+                <!-- <md-card-title-media></md-card-title-media> -->
+              </md-card-title-text>
+            </md-card-title>
+
+            <!-- buttons -->
+            <md-card-actions layout="row" layout-align="end center">
+              <button
+                type="button"
+                class="md-raised md-warn md-button md-ink-ripple"
+                ng-click="back('stage2')"
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                class="md-raised md-warn md-button md-ink-ripple"
+                ng-click="next('stage4')"
+              >
+                Next
+              </button>
+            </md-card-actions>
+          </md-card>
+
+          <!-- stage4 -->
+          <md-card
+            class="card-40-center animate-switch stepCard"
+            md-theme-watch
+            ng-switch-when="stage4"
+          >
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">About</span>
+                <md-card-content>
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Description</label>
+                      <input
+                        type="text"
+                        name="description"
+                        ng-model="formParams.about"
+                      />
+                    </md-input-container>
+                  </div>
+
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Profile</label>
+                      <input
+                        type="file"
+                        ng-model-instant
+                        onchange="angular.element(this).scope().imageUpload(event)"
+                        name="profilePic"
+                      />
+                    </md-input-container>
+                  </div>
+
+                  <div layout="row">
+                    <md-input-container flex="100">
+                      <label>Social Media</label>
+                      <input
+                        type="text"
+                        name="social"
+                        ng-model="formParams.socials"
+                      />
+                    </md-input-container>
+                  </div>
+                </md-card-content>
+                <!-- <md-card-title-media></md-card-title-media> -->
+              </md-card-title-text>
+            </md-card-title>
+
+            <!-- buttons -->
+            <md-card-actions layout="row" layout-align="end center">
+              <button
+                type="button"
+                class="md-raised md-warn md-button md-ink-ripple"
+                ng-click="back('stage3')"
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                class="md-raised md-warn md-button md-ink-ripple"
+                ng-click="next('stage5')"
+              >
+                Next
+              </button>
+            </md-card-actions>
+          </md-card>
+
+          <!--
+         
+        Stage summary
+       
+        -->
+          <md-card
+            class="card-40-center animate-switch stepCard"
+            md-theme-watch
+            ng-switch-when="stage5"
+          >
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Summary</span>
+                <span class="md-subhead">Name: {{formParams.name}}</span>
+
+                <span class="md-subhead">Gender: {{formParams.gender}}</span>
+                <span class="md-subhead"
+                  >Date of Birth: {{formParams.birth}}</span
+                >
+                <span class="md-subhead"
+                  >Marrital Status: {{formParams.marital}}</span
+                >
+                <span class="md-subhead"
+                  >Intrests: {{formParams.interests}}</span
+                >
+                <span class="md-subhead">Alcohol: {{formParams.alcohol}}</span>
+                <span class="md-subhead">Pets: {{formParams.pets}}</span>
+                <span class="md-subhead"
+                  >Charities: {{formParams.charities}}</span
+                >
+                <span class="md-subhead">Team: {{formParams.team}}</span>
+                <span class="md-subhead"
+                  >Association: {{formParams.association}}</span
+                >
+                <span class="md-subhead">Sports: {{formParams.sports}}</span>
+                <span class="md-subhead"
+                  >Desciprtion: {{formParams.about}}</span
+                >
+                <span class="md-subhead"
+                  >Profile: {{formParams.profilePic}}</span
+                >
+                <span class="md-subhead"
+                  >Social Media: {{formParams.socials}}</span
+                >
+              </md-card-title-text>
+
+              <md-card-title-media>
+                <button
+                  class="md-raised md-warn md-button md-ink-ripple"
+                  type="button"
+                  ng-click="back('stage4')"
+                >
+                  <span class="ng-scope">Back</span>
+                </button>
+                <button
+                  class="md-raised md-warn md-button md-ink-ripple"
+                  type="button"
+                  ng-click="submitForm()"
+                >
+                  <span class="ng-scope">Submit</span>
+                </button>
+              </md-card-title-media>
+            </md-card-title>
+          </md-card>
+        </div>
+      </form>
+    </div>
+  </md-content>
+</main>

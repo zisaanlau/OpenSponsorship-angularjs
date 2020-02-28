@@ -1,0 +1,35 @@
+<div ng-app="OpenSponsorship" ng-controller="MainController">
+  <div ng-if="shown.show">
+    <form-page
+      selected-person="formParams"
+      editing="editing.editing"
+    ></form-page>
+  </div>
+  <div ng-if="!shown.show">
+    <div class="table-users">
+      <div class="header">Athletes</div>
+
+      <table>
+        <tr>
+          <th>No.</th>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>Team</th>
+          <th>Association</th>
+        </tr>
+
+        <tr ng-repeat="user in users" ng-click="getRecord(user.position)">
+          <!-- <td><img src="{{user.image}}" alt="Pic" /></td> -->
+          <td>{{ user.position }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.gender }}</td>
+          <td>{{ user.team }}</td>
+          <td>{{ user.association }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div ng-if="!shown.show" class="upload-button" ng-click="isShown()">
+    <button>Upload Profile</button>
+  </div>
+</div>
