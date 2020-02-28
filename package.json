@@ -12,6 +12,10 @@
     "node-sass": "^4.13.1",
     "run-sequence": "^2.2.1"
   },
+  "engines": {
+    "node": "10.19.0",
+    "npm": "6.13.4"
+  },
   "scripts": {
     "test": "gulp test",
     "build": "gulp build",
@@ -66,8 +70,5 @@
     "uglify-save-license": "~0.4.1",
     "webpack-stream": "~2.1.1",
     "wiredep": "~2.2.2"
-  },
-  "engines": {
-    "node": ">=0.10.0"
   }
 }
