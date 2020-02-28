@@ -109,7 +109,7 @@ export class FormpageController {
       if (!this.editing) {
         $http({
           method: "POST",
-          url: "https://opensponsorship-liuz6.herokuapp.com/api",
+          url: "https://opensponsorship-zishan2.herokuapp.com/api",
           data: $scope.formParams
         })
           .then(() => {
@@ -125,7 +125,7 @@ export class FormpageController {
           $scope.formValidation = false;
           $http({
             method: "PUT",
-            url: "https://opensponsorship-liuz6.herokuapp.com/api",
+            url: "https://opensponsorship-zishan2.herokuapp.com/api",
             data: $scope.formParams
           })
             .then(() => {
