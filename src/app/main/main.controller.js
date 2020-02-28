@@ -25,7 +25,7 @@ export class MainController {
     $scope.getUser = () => {
       $http
         // .get("https://opensponsorship-liuz6.herokuapp.com/api")
-        .get("http://localhost:9527/api")
+        .get("https://opensponsorship-liuz6.herokuapp.com/api")
         .then(response => {
           $scope.allData = response.data;
           return response.data.map((person, index) => {
