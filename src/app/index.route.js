@@ -8,7 +8,7 @@ export function routerConfig($routeProvider, $locationProvider) {
     //   controllerAs: "form",
     //   css: "assets/css/formpage.css"
     // })
-    .when("/main", {
+    .when("/", {
       templateUrl: "app/main/main.html",
       controller: "MainController",
       controllerAs: "main"
