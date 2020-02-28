@@ -72,17 +72,37 @@ export class FormpageController {
     $scope.next = stage => {
       $scope.formValidation = true;
 
-      if ($scope.multiStepForm.$valid) {
+      if (
+        stage === "stage2" &&
+        $scope.formParams.name != null &&
+        $scope.formParams.gender != null &&
+        $scope.formParams.birth != null
+      ) {
         $scope.direction = 1;
         $scope.stage = stage;
-        $scope.formValidation = false;
-
         $scope.progressValue += 20;
+        $scope.formValidation = false;
+      } else if (stage === "stage3" || stage === "stage5") {
+        $scope.direction = 1;
+        $scope.stage = stage;
+        $scope.progressValue += 20;
+        $scope.formValidation = false;
+      } else if (
+        stage === "stage4" &&
+        $scope.formParams.team != null &&
+        $scope.formParams.association != null
+      ) {
+        $scope.direction = 1;
+        $scope.stage = stage;
+        $scope.progressValue += 20;
+        $scope.formValidation = false;
+      } else {
+        alert("Please fill the required fields!");
+        return;
       }
     };
 
     $scope.dateUpload = event => {
-      // console.info(event.target.value);
       $scope.formParams.birth = event.target.value;
     };
 
@@ -103,6 +123,7 @@ export class FormpageController {
     $scope.back = stage => {
       $scope.direction = 0;
       $scope.stage = stage;
+      $scope.progressValue -= 20;
     };
 
     $scope.submitForm = () => {
