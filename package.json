@@ -2,6 +2,7 @@
   "name": "openSponsorship",
   "version": "0.0.0",
   "dependencies": {
+    "angular-animate": "^1.7.9",
     "angular-css": "^1.0.8",
     "cors": "^2.8.5",
     "express": "^4.17.1",
